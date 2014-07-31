@@ -1,30 +1,33 @@
-conf = {
-    'ip_prefix' => '192.168.27',
-    'mac_prefix' => '080027027',
-    'box_name' => 'precise',
-    'box_url' => 'http://files.vagrantup.com/precise64.box',
-    'allocate_memory' => 3072,
-}
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
 
-Vagrant::Config.run do |config|
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
 
-  config.vm.box = conf['box_name']
-  config.vm.box_url = conf['box_url']
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  memory = conf['allocate_memory'].to_s()
-  config.vm.customize ["modifyvm", :id, "--memory", memory]
+  config.vm.box = "precise64"
 
-  suffix = "100"
+  # The url from where the 'config.vm.box' box will be fetched if it
+  # doesn't already exist on the user's system.
+  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
-  ip_prefix = conf['ip_prefix']
-  ip = "#{ip_prefix}.#{suffix}"
+  # Create a private network, which allows host-only access to the machine
+  # using a specific IP.
+  config.vm.network :private_network, ip: '192.168.27.100', mac: '080027027100'
 
-  mac_prefix = conf['mac_prefix']
-  mac = "#{mac_prefix}#{suffix}"
+  # Create a public network, which generally matched to bridged network.
+  # Bridged networks make the machine appear as another physical device on
+  # your network.
+  # config.vm.network :public_network
 
-  config.vm.network(:hostonly, ip, :mac => mac)
+  config.vm.provider :virtualbox do |vb|
+    # Change memory:
+    vb.customize ["modifyvm", :id, "--memory", "3072"]
+  end
 
-  config.vm.provision :shell, :inline =>
-    "cp /vagrant/install-packages.sh .; sudo './install-packages.sh'"
+  config.vm.provision "shell",
+    inline: "cp /vagrant/install-packages.sh .; sudo './install-packages.sh'"
 
 end
+
