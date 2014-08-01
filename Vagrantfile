@@ -8,6 +8,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.box = "ubuntu/trusty64"
 
+  # Give a name to the machine (other than default)
+  config.vm.define "Devstack" do |foo|
+  end
+
+  # Disable check update
+  config.vm.box_check_update = false
+
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
   # config.vm.box_url = "http://files.vagrantup.com/precise64.box"
@@ -48,10 +55,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # vb.gui = true
 
     # Use VBoxManage to customize the VM. For example to change memory:
-    vb.customize ["modifyvm", :id, "--memory", "3072"]
+    vb.customize ["modifyvm", :id, "--memory", "3072", "--ostype", "Ubuntu_64", "--cpus", "2"]
   end
 
-  config.vm.provision "shell",
-    inline: "cp /vagrant/load.sh .; su vagrant -c './load.sh'"
+  $script = <<SCRIPT
+echo 'Provisionning...'
+cp /vagrant/load.sh .
+su vagrant -c './load.sh'
+SCRIPT
+
+  config.vm.provision "shell", inline: $script
 
 end

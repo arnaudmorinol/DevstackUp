@@ -2,7 +2,7 @@
 set -e
 set -x
 apt-get update
-apt-get install -qqy git vim python-setuptools libpq-dev python-dev libssl-dev libxml2-dev libxslt-dev gir1.2-gnomekeyring-1.0 pkg-config build-essential libnspr4-dev
+apt-get install -qqy git vim python-setuptools libpq-dev python-dev libssl-dev libxml2-dev libxslt-dev gir1.2-gnomekeyring-1.0 pkg-config build-essential libnspr4-dev libvirt-dev
 easy_install --upgrade pip
 git clone --depth=1 https://review.openstack.org/p/openstack-dev/devstack.git
 cd devstack;
