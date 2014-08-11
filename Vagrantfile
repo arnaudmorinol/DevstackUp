@@ -6,7 +6,8 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  config.vm.box = "ubuntu/trusty64"
+  #config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "devstack"
 
   # Give a name to the machine (other than default)
   config.vm.define "Devstack" do |foo|
@@ -52,7 +53,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   config.vm.provider :virtualbox do |vb|
     # Don't boot with headless mode
-    # vb.gui = true
+    vb.gui = true
 
     # Use VBoxManage to customize the VM. For example to change memory:
     vb.customize ["modifyvm", :id, "--memory", "3072", "--ostype", "Ubuntu_64", "--cpus", "2"]
