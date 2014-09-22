@@ -2,7 +2,7 @@
 
 ## Features
 
-* 3GB Vagrant VM
+* 5GB Vagrant VM
 * Horizon forwarded to `localhost:8080`
 * Verbose mode and logging enabled
 
@@ -23,7 +23,7 @@
 
 #### Notes:
 
-* If you have another box named `precise`, you must remove it first with `vagrant box remove precise`
+* If you have another box named `devstack-arnaud`, you must remove it first with `vagrant box remove devstack-arnaud`
 * To build, vagrant box that has most of the devstack dependencies pre-installed:
-  * `cd build_box`
+  * `cd build-box`
   * `./build.sh`
