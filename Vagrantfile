@@ -7,7 +7,7 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   #config.vm.box = "ubuntu/trusty64"
-  config.vm.box = "devstack"
+  config.vm.box = "devstack-arnaud"
 
   # Give a name to the machine (other than default)
   config.vm.define "Devstack" do |foo|
@@ -28,7 +28,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  config.vm.network :private_network, ip: '192.168.27.100', mac: '080027027100'
+  config.vm.network :private_network, ip: '192.168.42.42', mac: '080027027100'
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
